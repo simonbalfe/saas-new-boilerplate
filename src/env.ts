@@ -1,7 +1,7 @@
 const env = {
     NODE_ENV: process.env.NODE_ENV!,
     
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001',
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
         
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY!,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
