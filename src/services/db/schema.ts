@@ -81,9 +81,29 @@ export const jwks = pgTable("jwks", {
   expiresAt: timestamp("expires_at"),
 });
 
+export const xProfile = pgTable(
+  "x_profile",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    handle: text("handle").notNull(),
+    twitterUserId: text("twitter_user_id"),
+    notes: text("notes"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [index("xProfile_userId_idx").on(table.userId)],
+);
+
 export const userRelations = relations(user, ({ many }) => ({
   sessions: many(session),
   accounts: many(account),
+  xProfiles: many(xProfile),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -100,4 +120,11 @@ export const accountRelations = relations(account, ({ one }) => ({
   }),
 }));
 
-export const schema = { user, session, account, verification, jwks };
+export const xProfileRelations = relations(xProfile, ({ one }) => ({
+  user: one(user, {
+    fields: [xProfile.userId],
+    references: [user.id],
+  }),
+}));
+
+export const schema = { user, session, account, verification, jwks, xProfile };

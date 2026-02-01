@@ -21,6 +21,10 @@ const env = {
     
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET!,
+
+    SCRAPING_API_URL: process.env.SCRAPING_API_URL || 'http://localhost:3001',
+
+    OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY!,
 }
 
 export default env;
